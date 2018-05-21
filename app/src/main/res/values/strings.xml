@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyFirebase</string>
-    <string name="title_activity_main2">Buying</string>
-    <string name="title_activity_login">Buying</string>
+    <string name="title_activity_main2">MyFirebase</string>
+    <string name="title_activity_login">MyFirebase</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

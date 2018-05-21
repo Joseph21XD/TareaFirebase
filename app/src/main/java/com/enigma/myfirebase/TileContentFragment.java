@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +32,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -95,9 +98,11 @@ public class TileContentFragment extends Fragment {
     public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         // Set numbers of Tiles in RecyclerView.
         ArrayList<Producto> products;
+        Context context;
 
         public ContentAdapter(Context context, ArrayList<Producto> productos) {
             products= productos;
+            this.context= context;
         }
 
         @Override
@@ -107,16 +112,7 @@ public class TileContentFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            ImageTask imageTask= new ImageTask();
-            Bitmap bitmap = null;
-            try {
-                bitmap = imageTask.execute(products.get(position).getImagen()).get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            holder.picture.setImageBitmap(bitmap);
+            Glide.with(context).load(Uri.parse(products.get(position).getImagen())).into(holder.picture);
             holder.name.setText(products.get(position).nombre);
 
         }

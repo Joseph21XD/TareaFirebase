@@ -65,15 +65,7 @@ public class Main3Activity extends AppCompatActivity {
                     Uri descarga = taskSnapshot.getDownloadUrl();
                     imagen= descarga.toString();
                     Log.d("FOTO", descarga.toString());
-                    ImageTask imageTask = new ImageTask();
-                    try {
-                        Bitmap bitmap =  imageTask.execute(descarga.toString()).get();
-                        imageView.setImageBitmap(bitmap);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                    Glide.with(getApplicationContext()).load(descarga).into(imageView);
                     imageView.setBackground(null);
 
                     Toast.makeText(getApplicationContext(),"Imagen ingresada",Toast.LENGTH_SHORT).show();

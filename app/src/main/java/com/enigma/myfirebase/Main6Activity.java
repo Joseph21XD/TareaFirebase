@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -52,15 +53,7 @@ public class Main6Activity extends AppCompatActivity {
         editText3.setText(Main7Activity.productos.get(position).descripcion);
         imagen= Main7Activity.productos.get(position).imagen;
         ImageTask imageTask = new ImageTask();
-        Bitmap bitmap = null;
-        try {
-            bitmap = imageTask.execute(Main7Activity.productos.get(position).imagen).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        imageView.setImageBitmap(bitmap);
+        Glide.with(getApplicationContext()).load(Uri.parse(Main7Activity.productos.get(position).getImagen())).into(imageView);
     }
     public void execute(final Producto producto, final Producto producto2, final int mode){
         //databaseReference.child(producto.getNombre()).removeValue(); // esto si lo hace
